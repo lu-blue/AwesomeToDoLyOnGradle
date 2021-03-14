@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="57.075" y="-112.0">AwesomeToDoLyOnGradle.Task</node>
+    <node x="0.0" y="80.0">AwesomeToDoLyOnGradle.YourList</node>
+    <node x="62.675000000000004" y="160.0">AwesomeToDoLyOnGradle.App</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="AwesomeToDoLyOnGradle.App" target="AwesomeToDoLyOnGradle.Task">
+      <point x="27.0" y="-15.0" />
+      <point x="125.67500000000001" y="140.0" />
+      <point x="132.5" y="140.0" />
+      <point x="132.5" y="55.0" />
+      <point x="128.075" y="55.0" />
+      <point x="30.0" y="15.0" />
+    </edge>
+    <edge source="AwesomeToDoLyOnGradle.App" target="AwesomeToDoLyOnGradle.YourList">
+      <point x="-27.0" y="-15.0" />
+      <point x="71.67500000000001" y="140.0" />
+      <point x="27.75" y="140.0" />
+      <point x="-27.75" y="15.0" />
+    </edge>
+    <edge source="AwesomeToDoLyOnGradle.YourList" target="AwesomeToDoLyOnGradle.Task">
+      <point x="-27.75" y="-15.0" />
+      <point x="27.75" y="55.0" />
+      <point x="68.075" y="55.0" />
+      <point x="-30.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="75.5" y="-8.5" />
+  <SelectedNodes>
+    <node>AwesomeToDoLyOnGradle.Task</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
