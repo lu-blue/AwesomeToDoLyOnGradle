@@ -16,6 +16,7 @@ public class App {
         startApp();
         System.out.println("\n");
         viewAllOptions();
+
         while (!quit) {
             System.out.println("\nOk, now enter an option number (or enter 5 and view all available options again):");
             int option = scanner.nextInt();
@@ -44,6 +45,8 @@ public class App {
 
                 case 6:
                     System.out.println("\nSee you next time! Your ToDoLy is shutting down..."); //doesn´t really shut down :)
+                    System.exit(0);
+                    scanner.close();
                     //saveAndQuit();
                     break;
 
@@ -53,6 +56,7 @@ public class App {
         }
 
         System.exit(0);
+        scanner.close();
 
     }
 
@@ -63,9 +67,11 @@ public class App {
         String title = scanner.nextLine();
         System.out.println("Please, enter your task description (what you need to do: )");
         String taskBody = scanner.nextLine();
+        System.out.println("Please, enter when this task is due (in the format yyyy-MM-dd");
+        String dueDate = scanner.nextLine();
 
         Task newTask = new Task(); // a new task object is created
-        newTask.Task(project, title, taskBody);
+        newTask.Task(project, title, taskBody, dueDate);
         if(list0.addNewTask(newTask)) { //checking if a task is successfully added
             System.out.println("Awesome! A new task is added in a project " + project
                     + ": \nTask title: " + title
@@ -90,9 +96,11 @@ public class App {
         String newTitle = scanner.nextLine();
         System.out.println("Give a new description to your task to replace the old one: ");
         String newTaskBody = scanner.nextLine();
+        System.out.println("Please, enter when this task is due (in the format yyyy-MM-dd");
+        String newDueDate = scanner.nextLine();
 
         Task newTask = new Task();
-        newTask.Task(newProject, newTitle, newTaskBody);
+        newTask.Task(newProject, newTitle, newTaskBody, newDueDate);
         if (list0.updateExistingTask(existingTaskRecord, newTask)) {
             System.out.println("Your task was successfully updated.");
         } else {

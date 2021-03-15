@@ -91,6 +91,7 @@ public class YourList {   //list that will contain tasks
             System.out.println((i+1) + "." +
                     this.myTasks.get(i).getProject() + " -> " +
                     this.myTasks.get(i).getTitle() + " -> " +
+                    this.myTasks.get(i).getDueDate() + " -> " +
                     this.myTasks.get(i).getTaskBody());
         }
 
