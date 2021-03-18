@@ -84,17 +84,34 @@ public class YourList {   //list that will contain tasks
     // How? Like a switch? And then rearrange how I print out things
     // (in this method now I have only view in order of project, title, task body.
 
+
     //Enables viewing a complete list of tasks.
     public void viewTaskList() {
-        System.out.println("Here are all your existing tasks:");
-        for (int i = 0; i<this.myTasks.size(); i++) {
-            System.out.println((i+1) + "." +
-                    this.myTasks.get(i).getProject() + " -> " +
-                    this.myTasks.get(i).getTitle() + " -> " +
-                    this.myTasks.get(i).getDueDate() + " -> " +
-                    this.myTasks.get(i).getTaskBody());
+        if(this.myTasks.size() <= 0) {
+            System.out.println("Your list of tasks is empty.");
+        } else {
+            System.out.println("Here are all your existing tasks:\n");
+            for (int i = 0; i < this.myTasks.size(); i++) {
+                System.out.println((i + 1) + "." +
+                        "Project: " + this.myTasks.get(i).getProject() + " -> " +
+                        "Title: " + this.myTasks.get(i).getTitle() + " -> " +
+                        "Description: " + this.myTasks.get(i).getTaskBody() + " -> " +
+                        "Due date: " + this.myTasks.get(i).getDueDate() + " -> " +
+                        "Status: " + this.myTasks.get(i).getIsDone()); // Need to be redone when Writer/Reader is ready
+
+            }
         }
 
     }
-}
+
+    //public void defaultStatus() {
+     //   int i = 0; i < this.myTasks.size(); i++;
+     //   while (this.myTasks.get(i).getIsDone() == true) {
+     //       System.out.println("not done");
+     //   }
+
+
+
+    }
+
 
