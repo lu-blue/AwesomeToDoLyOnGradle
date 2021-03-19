@@ -111,32 +111,7 @@ public class YourList implements Serializable {
         }
     }
 
-    /**
-     * Saving a task list after adding/editing/removing tasks while in the app
-     **/
-    public void saveAndQuitApp() {
-        FileMaster fileMaster = new FileMaster(); // to write a file
-        fileMaster.writeAsObject("taskAdded.txt", this.myTasks);
 
-        ArrayList<Task> checkObject = fileMaster.readAsObject("taskAdded.txt"); // to read a file
-        System.out.println ("Your tasks are saving...");
-        //prints all of the task
-        System.out.println("Your tasks are saved: " + checkObject);
-        //prints first task in the list
-        // System.out.println("Your first task is: " + checkObject.get(0));
-    }
-
-    /**
-     * For a returning user, a list saved into a file earlier is displayed
-     **/
-    // //if this file exists? returning user
-    //        //for a new user, we had an empty list, but for returning user we put this info into a list
-    public void viewListReturningUser() {
-        FileMaster fileMaster = new FileMaster();
-        ArrayList<Task> checkObject = fileMaster.readAsObject("taskAdded.txt"); // to read a file
-        System.out.println("The tasks you´ve added so far: " + checkObject);
-        this.myTasks = checkObject;
-    }
 
 
     //public void defaultStatus() {
