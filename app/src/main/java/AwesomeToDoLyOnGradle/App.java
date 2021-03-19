@@ -12,9 +12,10 @@ public class App {
 
     /**
      * When a user starts the app, the main method initializes a program,
-     * starting an interactive user interface which will display all the options a user can choose from to:
-     * either add a new task; view a task list; edit an existing Task; remove an existing task;
-     * view all available options, or save a list of tasks and quit an app.
+     * starting an interactive user interface which will display all the options
+     * a user can choose from to: add a new task; view a task list; edit an existing Task;
+     * remove an existing task; mark tasks as done; view all available options,
+     * or save a list of tasks and quit an app.
      * */
     public static void main(String[] args) {
         startApp();
@@ -24,7 +25,6 @@ public class App {
 
         viewAllOptions();
         boolean quit = false;
-        //list0 = FileMaster.readAsObject("taskAdded.txt");
 
         try {
             while (!quit) {
@@ -55,6 +55,10 @@ public class App {
                             break;
 
                         case 6:
+                            markAsDone();
+                            break;
+
+                        case 7:
                             saveAndQuitApp();
                             break;
 
@@ -78,12 +82,14 @@ public class App {
                 + "(2) View Task List\n"
                 + "(3) Edit Existing Task\n"
                 + "(4) Remove Existing Task\n"
-                + "(5) View all available options\n"
-                + "(6) Save and Quit");
+                + "(5) View Options\n"
+                + "(6) Mark Task as Done\n"
+                + "(7) Save and Quit");
     }
 
     private static void addNewTask () {
-        System.out.println("Is it your first time you add a task in ToDoLy? Then press 1. Otherwise, press 2.");
+        System.out.println("Is it your first time you add a task in ToDoLy? Press 1." +
+                "\nIf you´ve saved tasks before, press 2.");
         int choiceFork1 = scanner.nextInt();
         scanner.nextLine();
 
@@ -135,10 +141,6 @@ public class App {
      * which he/she can see from the displayed whole list of already entered tasks
      * */
     private static void editExistingTask () {
-        /**
-         * If a valid title is provided, a user is asked to input new values
-         * for all the task parameters, which then replace the ones stored in that task before
-         * */
         list0.viewList();
 
         System.out.println("\nEnter an existing task title: ");
@@ -151,6 +153,7 @@ public class App {
         /** If a valid title is provided, a user is asked to input new values
          * for all the task parameters, which then replace the ones stored in that task before
          * */
+
         System.out.println("Enter a new project name for your task to replace the old one: ");
         String newProject = scanner.nextLine();
         System.out.println("Enter a new title for your task to replace the old one: ");
@@ -188,6 +191,24 @@ public class App {
 
         if (list0.removeExistingTask(existingTaskRecord)) {
             System.out.println("Your task is successfully deleted.");
+            list0.saveTask();
+        } else {
+            System.out.println("An error occurred while removing your task.");
+        }
+    }
+
+    private static void markAsDone () {
+        list0.viewList();
+
+        System.out.println("Enter an existing task title: ");
+        String title = scanner.nextLine();
+        Task existingTaskRecord = list0.queryTask(title);
+        if (existingTaskRecord == null) {
+            System.out.println("Ooops, a task was not found.");
+            return;
+        }
+        if(list0.markAsDoneStatus(existingTaskRecord)){
+            System.out.println("Awesome, your task is marked as done now!");
             list0.saveTask();
         } else {
             System.out.println("An error occurred while removing your task.");

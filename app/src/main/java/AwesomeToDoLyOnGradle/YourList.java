@@ -38,6 +38,16 @@ public class YourList implements Serializable {
         return true;
     }
 
+    public boolean markAsDoneStatus(Task task0) {
+        int foundPosition = findTask(task0);
+        if (foundPosition < 0) {
+            System.out.println ("Task with a title " + task0.getTitle().substring(0, 1).toUpperCase() + task0.getTitle().substring(1) + " was not found.");
+            return false;
+        }
+        task0.setIsDone(true);
+        return true;
+    }
+
     /**
      * Removes all details about a task completely
      * after it finds a task by its title
