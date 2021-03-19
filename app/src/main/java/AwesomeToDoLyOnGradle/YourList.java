@@ -54,8 +54,8 @@ public class YourList implements Serializable {
     }
 
     /**
-     * Returns an index of a task you´re interested in,
-     * so that we can use it in the next method findTask below
+     * Returns an index of a task a user is interested in,
+     * so that he/she can use it in the next method findTask below
      * */
     private int findTask(Task task0) {
         return this.myTasks.indexOf(task0);
@@ -85,30 +85,32 @@ public class YourList implements Serializable {
         }
         return null;
     }
-    //Add for "sorting" so that 1) you show project first, then - title, task body and due date;
-    // and also 2) so that to show a due date first, then - project, title and task body).
-    // How? Like a switch? And then rearrange how I print out things
-    // (in this method now I have only view in order of project, title, task body, due date
 
-    // TODO Connect this method to Reading/Writing files (otherwise it shows only
-    // the task made by the first time user
     /**
-     * Enables viewing a complete list of tasks after they are entered by a first-time user.
-     * */
-    public void viewTaskList() {
-        if(this.myTasks.size() <= 0) {
-            System.out.println("Your list of tasks is empty.");
-        } else {
-            System.out.println("Here are all your existing tasks:\n");
-            for (int i = 0; i < this.myTasks.size(); i++) {
-                System.out.println((i + 1) + "." +
-                        "Project: " + this.myTasks.get(i).getProject() + " -> " +
-                        "Title: " + this.myTasks.get(i).getTitle() + " -> " +
-                        "Description: " + this.myTasks.get(i).getTaskBody() + " -> " +
-                        "Due date: " + this.myTasks.get(i).getDueDate() + " -> " +
-                        "Status: " + this.myTasks.get(i).getIsDone()); // Need to be redone when Writer/Reader is ready
-            }
-        }
+     * Saving a task list after adding/editing/removing tasks while in the app
+     **/
+    public void saveTask() {
+        FileMaster fileMaster = new FileMaster(); // to write a file
+        fileMaster.writeAsObject("taskAdded.txt", this.myTasks);
+
+        ArrayList<Task> checkObject = fileMaster.readAsObject("taskAdded.txt"); // to read a file
+        System.out.println ("Your tasks are saving...");
+        //prints all of the task
+        System.out.println("Your tasks are saved: " + checkObject);
+        this.myTasks = checkObject;
+        //prints first task in the list
+        // System.out.println("Your first task is: " + checkObject.get(0));
+    }
+
+    /**
+     * For a returning user/a user who at least added one task,
+     * a list saved into a file earlier is displayed
+     **/
+    public void viewList() {
+        FileMaster fileMaster = new FileMaster();
+        ArrayList<Task> checkObject = fileMaster.readAsObject("taskAdded.txt"); // to read a file
+        System.out.println("The tasks you´ve added so far: " + checkObject);
+        this.myTasks = checkObject;
     }
 
 

@@ -15,9 +15,9 @@ import java.util.Scanner;
  * */
 
 public class FileMaster {
-    private String fileName = "app/src/main/java/AwesomeToDoLyOnGradle/";
+    private String fileName = "src/main/java/AwesomeToDoLyOnGradle/";
 
-    public void writeAsObject(String fileName, YourList madeList) {
+    public void writeAsObject(String fileName, ArrayList<Task> madeList) {
         try {
             FileOutputStream fileStream = new FileOutputStream(fileName);
             ObjectOutputStream objectWriter = new ObjectOutputStream(fileStream);
@@ -34,14 +34,14 @@ public class FileMaster {
         }
     }
 
-    public static YourList readAsObject(String fileName) {
-        YourList madeList = new YourList();
+    public static ArrayList<Task> readAsObject(String fileName) {
+        ArrayList<Task> madeList = new ArrayList<>();
 
         try {
             FileInputStream fileInStream = new FileInputStream(fileName);
             ObjectInputStream objectReader = new ObjectInputStream(fileInStream);
 
-            madeList = (YourList) objectReader.readObject();
+            madeList = (ArrayList<Task>) objectReader.readObject();
 
             objectReader.close();
             fileInStream.close();
