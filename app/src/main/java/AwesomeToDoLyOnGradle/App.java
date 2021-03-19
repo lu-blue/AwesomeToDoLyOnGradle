@@ -10,6 +10,10 @@ public class App {
     private static Scanner scanner = new Scanner(System.in);
     private static YourList list0 = new YourList();
 
+    /**
+     * When a user starts the app, the main method initializes a program,
+     * starting an interactive user interface which will display all the options a user has
+     * */
     public static void main(String[] args) {
         startApp();
     }
@@ -18,12 +22,14 @@ public class App {
 
         viewAllOptions();
         boolean quit = false;
+        int option = 0;
+        // myTasks = FileMaster.readAsObject("taskAdded.txt");
 
         try {
             while (!quit) {
 
                     System.out.println("\nEnter an option number (or enter 5 to view options again):");
-                    int option = scanner.nextInt();
+                    option = scanner.nextInt();
                     scanner.nextLine();
 
                     switch (option) {
@@ -33,6 +39,8 @@ public class App {
 
                         case 2:
                             list0.viewTaskList(); // calls a method from class List0, applied on object list0 (made here, in Main class)
+                            //!!!!!! for a returning user
+                            list0.viewListReturningUser();
                             break;
 
                         case 3:
@@ -44,6 +52,7 @@ public class App {
                             break;
 
                         case 5:
+                            // for a first-time user
                             viewAllOptions();
                             break;
 
@@ -53,84 +62,98 @@ public class App {
 
                         default:
                             System.out.println("Invalid entry, just try again!");
-
                     }
-
                 }
-
-
         } catch (Exception e) {
             System.out.println(e.getMessage() + "\nThe app quited. Please, restart the app.");
             e.printStackTrace();
         } finally {
             if (scanner.nextLine().equals("quit"))
                 scanner.close();
-
         }
-        }
+    }
 
-        private static void addNewTask () {
-            System.out.println("Please, give a name to a project to which your task will belong to: ");
-            String project = scanner.nextLine();
-            System.out.println("Please, enter a task title: ");
-            String title = scanner.nextLine();
-            System.out.println("Please, enter your task description (what you need to do):");
-            String taskBody = scanner.nextLine();
-            System.out.println("Please, enter when this task is due (in the format yyyy-MM-dd):");
-            String dueDate = scanner.nextLine();
+    private static void viewAllOptions () {
+        System.out.println("" + "WELCOME TO TODOLY!\n"
+                + "Here is what you can do:");
+        System.out.println("(1) Add New Task\n"
+                + "(2) View Task List\n"
+                + "(3) Edit Existing Task\n"
+                + "(4) Remove Existing Task\n"
+                + "(5) View all available options\n"
+                + "(6) Save and Quit");
+    }
 
-            Task newTask = new Task(); // a new task object is created
-            newTask.Task(project, title, taskBody, dueDate); // !!!
-            if (list0.addNewTask(newTask)) { //checking if a task is successfully added
-                System.out.println(
-                        "Awesome, a new task is added!\nTask assigned to a project: " + project + "."
+    private static void addNewTask () {
+        System.out.println("Please, give a name to a project to which your task will belong to: ");
+        String project = scanner.nextLine();
+        System.out.println("Please, enter a task title: ");
+        String title = scanner.nextLine();
+        System.out.println("Please, enter your task description (what you need to do):");
+        String taskBody = scanner.nextLine();
+        System.out.println("Please, enter when this task is due (in the format yyyy-MM-dd):");
+        String dueDate = scanner.nextLine();
+
+        Task newTask = new Task(); // a new task object is created
+        newTask.Task(project, title, taskBody, dueDate); // !!!
+        if (list0.addNewTask(newTask)) { //checking if a task is successfully added
+            System.out.println(
+                    "Awesome, a new task is added!\nTask assigned to a project: " + project + "."
                         + "\nTask title: " + title + "."
                         + "\nWhat to do: " + taskBody + "."
                         + "\nDue date: " + dueDate + "."
                         + "\nStatus: Not done.");
 
-            } else {
-                System.out.println("Cannot add, " + title + "as it already exists for another task.");
-            }
+        } else {
+            System.out.println("Cannot add, " + title + "as it already exists for another task.");
+        }
+    }
+
+    /**
+     * To edit a task, a user is asked to give a valid task title first
+     * which he/she can see from the displayed whole list of already entered tasks
+     * */
+    private static void editExistingTask () {
+        System.out.println("Review your list before editing!");
+        list0.viewTaskList();
+
+        System.out.println("\nEnter an existing task title: ");
+        String title = scanner.nextLine();
+        Task existingTaskRecord = list0.queryTask(title);
+        if (existingTaskRecord == null) {
+            System.out.println("Ooops, a task was not found.");
+            return;
         }
 
-        private static void editExistingTask () {
-            System.out.println("Review your list before editing!");
-            list0.viewTaskList();
+        /**
+         * If a valid title is provided, a user is asked to input new values
+         * for all the task parameters, which then replace the ones stored in that task before
+         * */
+        System.out.println("Enter a new project name for your task to replace the old one: ");
+        String newProject = scanner.nextLine();
+        System.out.println("Enter a new title for your task to replace the old one: ");
+        String newTitle = scanner.nextLine();
+        System.out.println("Give a new description to your task to replace the old one: ");
+        String newTaskBody = scanner.nextLine();
+        System.out.println("Please, enter a new due date for this task (in the format yyyy-MM-dd):");
+        String newDueDate = scanner.nextLine();
 
-            System.out.println("\nEnter an existing task title: ");
-            String title = scanner.nextLine();
-            Task existingTaskRecord = list0.queryTask(title);
-            if (existingTaskRecord == null) {
-                System.out.println("Ooops, a task was not found.");
-                return;
-            }
-
-            System.out.println("Enter a new project name for your task to replace the old one: ");
-            String newProject = scanner.nextLine();
-            System.out.println("Enter a new title for your task to replace the old one: ");
-            String newTitle = scanner.nextLine();
-            System.out.println("Give a new description to your task to replace the old one: ");
-            String newTaskBody = scanner.nextLine();
-            System.out.println("Please, enter a new due date for this task (in the format yyyy-MM-dd):");
-            String newDueDate = scanner.nextLine();
-
-
-            Task newTask = new Task();
-            newTask.Task(newProject, newTitle, newTaskBody, newDueDate);
-            if (list0.updateExistingTask(existingTaskRecord, newTask)) {
-                System.out.println("Your task was successfully updated!");
-            } else {
-                System.out.println("An error occurred while updating your task.");
-            }
+        Task newTask = new Task();
+        newTask.Task(newProject, newTitle, newTaskBody, newDueDate);
+        if (list0.updateExistingTask(existingTaskRecord, newTask)) {
+            System.out.println("Your task was successfully updated!");
+        } else {
+            System.out.println("An error occurred while updating your task.");
         }
-
-
-        //Looking for a task by title works but is cumbersome (as titles can be hard to remember or reproduce)
-        private static void removeExistingTask() {
-            System.out.println("Enter an existing task title: ");
-            String title = scanner.nextLine();
-            Task existingTaskRecord = list0.queryTask(title);
+    }
+    /**
+     * If a valid title is provided by the user,
+     * the whole task with that title is being removed
+     * */
+    private static void removeExistingTask() {
+        System.out.println("Enter an existing task title: ");
+        String title = scanner.nextLine();
+        Task existingTaskRecord = list0.queryTask(title);
             if (existingTaskRecord == null) {
                 System.out.println("Ooops, a task was not found.");
                 return;
@@ -141,9 +164,9 @@ public class App {
             } else {
                 System.out.println("An error occurred while removing your task.");
             }
-        }
+    }
 
-        //private static void saveAndQuitApp () {
+    //private static void saveAndQuitApp () {
          //   System.out.println("Do you want to save your list and quit ToDoLy? " +
          //           "If yes, type a word QUIT. If not, press any option from 1 to 5");
 
@@ -162,21 +185,8 @@ public class App {
 
          //   }
 
-        private static void viewAllOptions () {
-            System.out.println("" + "WELCOME TO TODOLY."
-                    + "You have X tasks to do and Y tasks are done!\n"
-                    + "Here is a list of options:");
-            System.out.println("(1) Add New Task\n" //2 add
-                    + "(2) View Task List\n" //1 display. In IP specs: by project or by due date
-                    + "(3) Edit Existing Task\n" // 3 update existing; 4 remove
-                    + "(4) Remove Existing Task\n"
-                    + "(5) View all available options\n" // 6 print available options
-                    + "(6) Save and Quit"); //0 shutdown. In IP specs: not only quit, but save to file
-
-        }
-
-
-        //Additional method (not required in IP specs) for searching a task by its title
+    //TODO Remove from here at all?
+    //Additional method (not required in IP specs) for searching a task by its title
         public static void queryTask () {
             System.out.println("Enter an existing task title: ");
             String title = scanner.nextLine();
@@ -184,10 +194,8 @@ public class App {
             if (existingTaskRecord == null) {
                 System.out.println("Ooops, a task was not found.");
             }
-            //System.out.println("Task with a title " + existingTaskRecord.getTitle()
-             //       + "belongs to a project " + existingTaskRecord.getProject() + "."
-            //        + "\n Task description: " + existingTaskRecord.getTaskBody());
-
-        }
     }
+
+
+}
 

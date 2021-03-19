@@ -3,14 +3,23 @@ package AwesomeToDoLyOnGradle;
 import java.io.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * This class contains methods for writing an array list of tasks into a file,
+ * obtained from the user, and re-writing it over if the user makes changes to it.
+ * In addition, it provides functionality to then read this list again in the app
+ * and make changes to it, even after restarting.
+ *
+ * "fileName" provides the path to the file to which the list can be written into.
+ * */
 
 public class FileMaster {
-    private String path = "app/src/main/java/AwesomeToDoLyOnGradle/";
-    //private String path = "/Users/lubov/Documents/AwesomeToDoLyOnGradle/app/src/main/java/AwesomeToDoLyOnGradle";
+    private String fileName = "app/src/main/java/AwesomeToDoLyOnGradle/";
 
-    public void writeAsObject(ArrayList<Task> madeList) {
+    public void writeAsObject(String fileName, ArrayList<Task> madeList) {
         try {
-            FileOutputStream fileStream = new FileOutputStream(path + "taskAfterAdd.txt");
+            FileOutputStream fileStream = new FileOutputStream(fileName);
             ObjectOutputStream objectWriter = new ObjectOutputStream(fileStream);
 
             objectWriter.writeObject(madeList);
@@ -25,11 +34,11 @@ public class FileMaster {
         }
     }
 
-    public ArrayList<Task> readAsObject() {
-        ArrayList<Task> madeList = new ArrayList<>();
+    public static ArrayList<Task> readAsObject(String fileName) {
+        ArrayList<Task> madeList = new ArrayList<Task>();
 
         try {
-            FileInputStream fileInStream = new FileInputStream(path + "taskAfterAdd.txt");
+            FileInputStream fileInStream = new FileInputStream(fileName);
             ObjectInputStream objectReader = new ObjectInputStream(fileInStream);
 
             madeList = (ArrayList<Task>) objectReader.readObject();
@@ -44,6 +53,7 @@ public class FileMaster {
         }
         return madeList;
     }
+
 
 
 }
