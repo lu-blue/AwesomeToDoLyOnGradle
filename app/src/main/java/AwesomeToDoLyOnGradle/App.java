@@ -48,7 +48,7 @@ public class App {
                             break;
 
                         case 6:
-                            saveAndQuitApp();
+                            list0.saveAndQuitApp();
                             break;
 
                         default:
@@ -95,10 +95,10 @@ public class App {
         }
 
         private static void editExistingTask () {
-            System.out.println("Review your list before editing: ");
+            System.out.println("Review your list before editing!");
             list0.viewTaskList();
 
-            System.out.println("Enter an existing task title: ");
+            System.out.println("\nEnter an existing task title: ");
             String title = scanner.nextLine();
             Task existingTaskRecord = list0.queryTask(title);
             if (existingTaskRecord == null) {
@@ -112,14 +112,14 @@ public class App {
             String newTitle = scanner.nextLine();
             System.out.println("Give a new description to your task to replace the old one: ");
             String newTaskBody = scanner.nextLine();
-            System.out.println("Please, enter a new due date for this task (in the format yyyy-MM-dd");
+            System.out.println("Please, enter a new due date for this task (in the format yyyy-MM-dd):");
             String newDueDate = scanner.nextLine();
 
 
             Task newTask = new Task();
             newTask.Task(newProject, newTitle, newTaskBody, newDueDate);
             if (list0.updateExistingTask(existingTaskRecord, newTask)) {
-                System.out.println("Your task was successfully updated.");
+                System.out.println("Your task was successfully updated!");
             } else {
                 System.out.println("An error occurred while updating your task.");
             }
@@ -137,20 +137,21 @@ public class App {
             }
 
             if (list0.removeExistingTask(existingTaskRecord)) {
-                System.out.println("Your task was successfully removed.");
+                System.out.println("Your task is successfully deleted.");
             } else {
                 System.out.println("An error occurred while removing your task.");
             }
         }
 
-        private static void saveAndQuitApp () {
-            System.out.println("Do you want to save your list and quit ToDoLy? " +
-                    "If yes, type a word QUIT. If not, press any options from 1 to 5");
+        //private static void saveAndQuitApp () {
+         //   System.out.println("Do you want to save your list and quit ToDoLy? " +
+         //           "If yes, type a word QUIT. If not, press any option from 1 to 5");
+
 
 
             //System.out.println ("Your tasks are saving...");
-            //ArrayList<YourList> myTasks = new ArrayList<>();
-            //myTasks.add(list0);
+            //ArrayList<YourList> myAwesomeTasks = new ArrayList<>();
+            //myAwesomeTasks.add(list0);
             //System.out.println(myTasks.toString()); //gives a weird output
 
             //FileMaster fileMaster = new FileMaster(); // to write a file
@@ -159,7 +160,7 @@ public class App {
             //ArrayList<YourList> checkObject = fileMaster.readAsObject(); // to read a file
             //System.out.println("Awesome! A new task is added: " + checkObject);
 
-            }
+         //   }
 
         private static void viewAllOptions () {
             System.out.println("" + "WELCOME TO TODOLY."
@@ -182,7 +183,6 @@ public class App {
             Task existingTaskRecord = list0.queryTask(title);
             if (existingTaskRecord == null) {
                 System.out.println("Ooops, a task was not found.");
-                return;
             }
             //System.out.println("Task with a title " + existingTaskRecord.getTitle()
              //       + "belongs to a project " + existingTaskRecord.getProject() + "."

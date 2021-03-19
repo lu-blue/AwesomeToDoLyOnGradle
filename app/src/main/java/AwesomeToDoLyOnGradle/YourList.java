@@ -1,8 +1,9 @@
 package AwesomeToDoLyOnGradle;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class YourList {   //list that will contain tasks
+public class YourList implements Serializable {   //list that will contain tasks
 
 
     private ArrayList<Task> myTasks;
@@ -26,12 +27,13 @@ public class YourList {   //list that will contain tasks
     public boolean updateExistingTask(Task oldTask, Task newTask) {
         int foundPosition = findTask(oldTask);
         if (foundPosition < 0) {
-            System.out.println ("Task with a title " + oldTask.getTitle() + " was not found.");
+            System.out.println ("Task with a title " + oldTask.getTitle().substring(0, 1).toUpperCase() + oldTask.getTitle().substring(1) + " was not found.");
             return false;
         }
 
         this.myTasks.set(foundPosition, newTask);
-        System.out.println("Task with a title " + oldTask.getTitle() + " was replaced with " + "a ask with a title " + newTask.getTitle());
+        System.out.println("Task with a title " + oldTask.getTitle().substring(0, 1).toUpperCase() + oldTask.getTitle().substring(1) + " was replaced with " + "a task with a title "
+                + newTask.getTitle().substring(0, 1).toUpperCase() + newTask.getTitle().substring(1) + ".");
         return true;
     }
 
@@ -39,11 +41,11 @@ public class YourList {   //list that will contain tasks
     public boolean removeExistingTask(Task task0) {
         int foundPosition = findTask(task0);
         if (foundPosition < 0) {
-            System.out.println ("Task with a title " + task0.getTitle() + " was not found.");
+            System.out.println ("Task with a title " + task0.getTitle().substring(0, 1).toUpperCase() + task0.getTitle().substring(1) + " was not found.");
             return false;
         }
         this.myTasks.remove(foundPosition);
-        System.out.println("Task with a title " + task0.getTitle() + " was deleted.");
+        System.out.println("Task with a title " + task0.getTitle().substring(0, 1).toUpperCase() + task0.getTitle().substring(1) + " is almost deleted...");
         return true;
     }
 
@@ -85,6 +87,7 @@ public class YourList {   //list that will contain tasks
     // (in this method now I have only view in order of project, title, task body.
 
 
+    //TODO Connect this method to Reading/Writing files
     //Enables viewing a complete list of tasks.
     public void viewTaskList() {
         if(this.myTasks.size() <= 0) {
@@ -102,6 +105,41 @@ public class YourList {   //list that will contain tasks
             }
         }
 
+    }
+
+   //TODO Figure out how to write a file with each line shown with index+1
+    //TODO Needed for asking user to choose a task by taskID, then find a task by this user input and perform edits/removes together with the user
+    @Override
+    public String toString() {
+        StringBuilder retVal = new StringBuilder();
+        for (int i = 0 ; i < this.myTasks.size() ; i++) {
+            retVal.append("TaskID ");
+            retVal.append(i + 1);
+            retVal.append(": ");
+            retVal.append(this.myTasks.get(i));
+            retVal.append("\n");
+        }
+        return retVal.toString();
+    }
+
+    //Saving a task list after
+    // adding/editing/removing tasks while in the app
+    public void saveAndQuitApp() {
+
+        FileMaster fileMaster = new FileMaster(); // to write a file
+        fileMaster.writeAsObject(this.myTasks);
+
+        ArrayList<Task> checkObject = fileMaster.readAsObject(); // to read a file
+        System.out.println ("Your tasks are saving...");
+        System.out.println("Your tasks are saved: " + checkObject);
+    }
+
+
+
+    public void viewListReturningUser() {
+        FileMaster fileMaster = new FileMaster();
+        ArrayList<Task> checkObject = fileMaster.readAsObject(); // to read a file
+        System.out.println("The tasks you´ve added so far: " + checkObject);
     }
 
     //public void defaultStatus() {

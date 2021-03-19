@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Task {
+public class Task implements Serializable {
 
     //fields
     private String project;
@@ -12,6 +12,7 @@ public class Task {
     private String taskBody;
     private LocalDate dueDate;
     private boolean isDone;
+    //private int taskID;
 
     // constructor
     public void Task(String project, String title, String taskBody, String date) {
@@ -25,6 +26,8 @@ public class Task {
         this.title = title;
         this.taskBody = taskBody;
         this.dueDate = LocalDate.parse(date, formatter);
+        //for (int i = 0; i < this.myTasks.size(); i++) {
+        //this.taskID = i + 1;
 
     }
 
@@ -71,9 +74,9 @@ public class Task {
 
     @Override
    public String toString() {
-   return "Task project = " + project + " , title = " + title +
-           " , description = " + taskBody + ", due date = " + dueDate +
-                ", Done = " + (isDone?"Done":"Not done.");
+   return "\nTask project: " + project + " , Title: " + title +
+           " , Description: " + taskBody + ", Due date: " + dueDate +
+                ", Status: " + (isDone?"Done":"Not done.\n");
     }
 
 

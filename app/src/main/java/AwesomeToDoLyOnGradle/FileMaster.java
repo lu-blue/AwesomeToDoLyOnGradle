@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileMaster {
-    private String path = "src/main/java/";
+    private String path = "app/src/main/java/AwesomeToDoLyOnGradle/";
+    //private String path = "/Users/lubov/Documents/AwesomeToDoLyOnGradle/app/src/main/java/AwesomeToDoLyOnGradle";
 
-    public void writeAsObject(ArrayList<YourList> madeList) {
+    public void writeAsObject(ArrayList<Task> madeList) {
         try {
             FileOutputStream fileStream = new FileOutputStream(path + "taskAfterAdd.txt");
             ObjectOutputStream objectWriter = new ObjectOutputStream(fileStream);
@@ -24,14 +25,14 @@ public class FileMaster {
         }
     }
 
-    public ArrayList<YourList> readAsObject() {
-        ArrayList<YourList> madeList = new ArrayList<>();
+    public ArrayList<Task> readAsObject() {
+        ArrayList<Task> madeList = new ArrayList<>();
 
         try {
             FileInputStream fileInStream = new FileInputStream(path + "taskAfterAdd.txt");
             ObjectInputStream objectReader = new ObjectInputStream(fileInStream);
 
-            madeList = (ArrayList<YourList>) objectReader.readObject();
+            madeList = (ArrayList<Task>) objectReader.readObject();
 
             objectReader.close();
             fileInStream.close();
