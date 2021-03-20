@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="149.47500000000002" y="0.0">AwesomeToDoLyOnGradle.Task</node>
+    <node x="103.66250000000002" y="540.0">AwesomeToDoLyOnGradle.YourList</node>
+    <node x="245.12500000000003" y="843.0">AwesomeToDoLyOnGradle.App</node>
+    <node x="0.0" y="391.0">AwesomeToDoLyOnGradle.FileMaster</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="AwesomeToDoLyOnGradle.App" target="AwesomeToDoLyOnGradle.Task">
+      <point x="26.375" y="-115.5" />
+      <point x="377.0" y="818.0" />
+      <point x="409.1625" y="818.0" />
+      <point x="409.1625" y="371.0" />
+      <point x="390.975" y="371.0" />
+      <point x="69.0" y="170.5" />
+    </edge>
+    <edge source="AwesomeToDoLyOnGradle.App" target="AwesomeToDoLyOnGradle.YourList">
+      <point x="-26.375" y="-115.5" />
+      <point x="73.75" y="126.5" />
+    </edge>
+    <edge source="AwesomeToDoLyOnGradle.YourList" target="AwesomeToDoLyOnGradle.Task">
+      <point x="36.875" y="-126.5" />
+      <point x="288.0375" y="515.0" />
+      <point x="332.5" y="515.0" />
+      <point x="332.5" y="371.0" />
+      <point x="252.97500000000002" y="371.0" />
+      <point x="-69.0" y="170.5" />
+    </edge>
+    <edge source="AwesomeToDoLyOnGradle.YourList" target="AwesomeToDoLyOnGradle.FileMaster">
+      <point x="-36.875" y="-126.5" />
+      <point x="214.28750000000002" y="515.0" />
+      <point x="241.5" y="515.0" />
+      <point x="80.5" y="49.5" />
+    </edge>
+    <edge source="AwesomeToDoLyOnGradle.FileMaster" target="AwesomeToDoLyOnGradle.Task">
+      <point x="0.0" y="-49.5" />
+      <point x="161.0" y="371.0" />
+      <point x="183.97500000000002" y="371.0" />
+      <point x="-138.0" y="170.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4068541300527241" x="614.6587473002161" y="559.0" />
+  <SelectedNodes>
+    <node>AwesomeToDoLyOnGradle.Task</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
