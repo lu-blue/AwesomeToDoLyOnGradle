@@ -1,6 +1,6 @@
 # AwesomeToDoLyOnGradle
 This application is a simple text based user interface representing a to-do list, in which a user can create, edit, remove, mark as done and save tasks.
-###@Author: Lubov Novozhilova
+### @Author: Lubov Novozhilova
 
 ## Getting started
 This application can be run directly via Gradle or via a generated jar file.
@@ -9,7 +9,6 @@ This application can be run directly via Gradle or via a generated jar file.
 While in the root folder, start the application with Gradle´s run command
 
 bash
-
 gradle run --console plain
 
 
@@ -18,16 +17,14 @@ gradle run --console plain
 Generate the jar file with Gradle´s build command: 
 
 bash
-
 gradle build
 
 The jar file will be generated in ´build/libs´ which can be run by a Java environment: 
 
 bash
-
 java -jar build/libs/app.jar
 
-##Usage
+## Usage
 
 You can see the inner Java structure of the app in this UML Class Diagram:
 ![UML Class Diagram](Diagrams_and_screenshots/myDiagram.png)
