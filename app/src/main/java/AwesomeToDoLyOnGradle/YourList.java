@@ -123,15 +123,6 @@ public class YourList implements Serializable {
         this.myTasks = checkObject;
     }
 
-
-
-
-    //public void defaultStatus() {
-     //   int i = 0; i < this.myTasks.size(); i++;
-     //   while (this.myTasks.get(i).getIsDone() == true) {
-     //       System.out.println("not done");
-     //   }
-
-    }
+}
 
 

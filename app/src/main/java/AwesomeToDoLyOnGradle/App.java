@@ -6,17 +6,20 @@ package AwesomeToDoLyOnGradle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * When a user starts the app, the main method initializes a program,
+ * starting an interactive user interface which will display all the options
+ * a user can choose from to: add a new task; view a task list; edit an existing Task;
+ * remove an existing task; mark tasks as done; view all available options,
+ * or save a list of tasks and quit an app.
+ * *
+ *  * @author Lubov Novozhilova
+ * */
+
 public class App {
     private static Scanner scanner = new Scanner(System.in);
     private static YourList list0 = new YourList();
 
-    /**
-     * When a user starts the app, the main method initializes a program,
-     * starting an interactive user interface which will display all the options
-     * a user can choose from to: add a new task; view a task list; edit an existing Task;
-     * remove an existing task; mark tasks as done; view all available options,
-     * or save a list of tasks and quit an app.
-     * */
     public static void main(String[] args) {
         startApp();
     }
@@ -107,9 +110,10 @@ public class App {
             Task newTask = new Task();
             newTask.Task(project, title, taskBody, dueDate);
             if (list0.addNewTask(newTask)) { //checking if a task is successfully added
+                System.out.println("Your task was successfully added!");
                 list0.saveTask();
             } else {
-                System.out.println("Cannot add, " + title + "as it already exists for another task.");
+                System.out.println("Cannot add, " + title + ", as it already exists for another task. Think of another title.");
             }
             break;
 
@@ -128,6 +132,7 @@ public class App {
                 Task newTask1 = new Task();
                 newTask1.Task(project1, title1, taskBody1, dueDate1);
                 if (list0.addNewTask(newTask1)) {
+                    System.out.println("Your task was successfully added!");
                     list0.saveTask();
                 } else {
                     System.out.println("Cannot add, " + title1 + "as it already exists for another task.");
@@ -147,7 +152,7 @@ public class App {
         String title = scanner.nextLine();
         Task existingTaskRecord = list0.queryTask(title);
         if (existingTaskRecord == null) {
-            System.out.println("Ooops, a task was not found.");
+            System.out.println("Ooops, a task was not found. Try again.");
             return;
         }
         /** If a valid title is provided, a user is asked to input new values
@@ -185,12 +190,12 @@ public class App {
         String title = scanner.nextLine();
         Task existingTaskRecord = list0.queryTask(title);
         if (existingTaskRecord == null) {
-            System.out.println("Ooops, a task was not found.");
+            System.out.println("Ooops, a task was not found. Try again.");
             return;
         }
 
         if (list0.removeExistingTask(existingTaskRecord)) {
-            System.out.println("Your task is successfully deleted.");
+            System.out.println("Your task was successfully deleted!");
             list0.saveTask();
         } else {
             System.out.println("An error occurred while removing your task.");
@@ -204,14 +209,14 @@ public class App {
         String title = scanner.nextLine();
         Task existingTaskRecord = list0.queryTask(title);
         if (existingTaskRecord == null) {
-            System.out.println("Ooops, a task was not found.");
+            System.out.println("Ooops, a task was not found. Try again.");
             return;
         }
         if(list0.markAsDoneStatus(existingTaskRecord)){
             System.out.println("Awesome, your task is marked as done now!");
             list0.saveTask();
         } else {
-            System.out.println("An error occurred while removing your task.");
+            System.out.println("An error occurred while removing your task. Try again.");
         }
     }
 
