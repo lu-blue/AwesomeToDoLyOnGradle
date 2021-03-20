@@ -6,9 +6,10 @@ This application is a simple text based user interface representing a to-do list
 This application can be run directly via Gradle or via a generated jar file.
 
 ### Run with Gradle
-While in the root folder, start the application with Gradle´s run command
+While in the root folder, start the application with Gradle´s run command:
 
 bash
+
 gradle run --console plain
 
 
@@ -17,16 +18,19 @@ gradle run --console plain
 Generate the jar file with Gradle´s build command: 
 
 bash
+
 gradle build
 
 The jar file will be generated in ´build/libs´ which can be run by a Java environment: 
 
 bash
+
 java -jar build/libs/app.jar
 
 ## Usage
 
 You can see the inner Java structure of the app in this UML Class Diagram:
+
 ![UML Class Diagram](Diagrams_and_screenshots/myDiagram.png)
 
 When a user starts the app, the main method initializes a program.
@@ -43,4 +47,4 @@ While the app is running, the user can choose to:
 * quit the app;
 * reopen the app and do all the above options, with the access to a list of tasks he/she has done before quitting the app. 
 
-Enjoy!
+#### Enjoy!
