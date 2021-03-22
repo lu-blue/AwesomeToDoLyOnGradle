@@ -3,48 +3,15 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="149.47500000000002" y="0.0">AwesomeToDoLyOnGradle.Task</node>
-    <node x="103.66250000000002" y="540.0">AwesomeToDoLyOnGradle.YourList</node>
-    <node x="245.12500000000003" y="909.0">AwesomeToDoLyOnGradle.App</node>
-    <node x="0.0" y="391.0">AwesomeToDoLyOnGradle.FileMaster</node>
+    <node x="241.0" y="684.0">AwesomeToDoLyOnGradle.ProjectSorter</node>
+    <node x="0.0" y="0.0">AwesomeToDoLyOnGradle.Task</node>
+    <node x="0.0" y="684.0">AwesomeToDoLyOnGradle.DueDateSorter</node>
+    <node x="390.0" y="0.0">AwesomeToDoLyOnGradle.YourList</node>
+    <node x="0.0" y="386.0">AwesomeToDoLyOnGradle.App</node>
+    <node x="256.0" y="386.0">AwesomeToDoLyOnGradle.FileMaster</node>
   </nodes>
   <notes />
-  <edges>
-    <edge source="AwesomeToDoLyOnGradle.App" target="AwesomeToDoLyOnGradle.Task">
-      <point x="79.125" y="-126.5" />
-      <point x="429.75" y="884.0" />
-      <point x="420.1625" y="884.0" />
-      <point x="420.1625" y="371.0" />
-      <point x="459.975" y="371.0" />
-      <point x="138.0" y="170.5" />
-    </edge>
-    <edge source="AwesomeToDoLyOnGradle.App" target="AwesomeToDoLyOnGradle.YourList">
-      <point x="-79.125" y="-126.5" />
-      <point x="271.5" y="884.0" />
-      <point x="177.41250000000002" y="884.0" />
-      <point x="-73.75" y="159.5" />
-    </edge>
-    <edge source="AwesomeToDoLyOnGradle.YourList" target="AwesomeToDoLyOnGradle.FileMaster">
-      <point x="-110.625" y="-159.5" />
-      <point x="140.53750000000002" y="515.0" />
-      <point x="80.5" y="515.0" />
-      <point x="-80.5" y="49.5" />
-    </edge>
-    <edge source="AwesomeToDoLyOnGradle.YourList" target="AwesomeToDoLyOnGradle.Task">
-      <point x="110.625" y="-159.5" />
-      <point x="361.7875" y="515.0" />
-      <point x="371.1125" y="515.0" />
-      <point x="371.1125" y="361.0" />
-      <point x="321.975" y="361.0" />
-      <point x="0.0" y="170.5" />
-    </edge>
-    <edge source="AwesomeToDoLyOnGradle.FileMaster" target="AwesomeToDoLyOnGradle.Task">
-      <point x="0.0" y="-49.5" />
-      <point x="161.0" y="371.0" />
-      <point x="183.97500000000002" y="371.0" />
-      <point x="-138.0" y="170.5" />
-    </edge>
-  </edges>
+  <edges />
   <settings layout="Hierarchic Group" zoom="0.4068541300527241" x="615.0" y="559.0" />
   <SelectedNodes>
     <node>AwesomeToDoLyOnGradle.App</node>
