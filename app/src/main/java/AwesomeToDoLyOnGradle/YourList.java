@@ -112,15 +112,39 @@ public class YourList implements Serializable {
         // System.out.println("Your first task is: " + checkObject.get(0));
     }
 
-    /**
-     * For a returning user/a user who at least added one task,
-     * a list saved into a file earlier is displayed
-     **/
     public void viewList() {
         FileMaster fileMaster = new FileMaster();
         ArrayList<Task> checkObject = fileMaster.readAsObject("taskAdded.txt"); // to read a file
         System.out.println("The tasks you´ve added so far: " + checkObject);
         this.myTasks = checkObject;
+    }
+
+    /**
+     * For a returning user/a user who at least added one task,
+     * a list saved into a file earlier is displayed.
+     * A list is displayed sorted by project (in ascending order, alphabetically)
+     **/
+    public void viewSortedByProject() {
+        FileMaster fileMaster = new FileMaster();
+        ArrayList<Task> checkObject = fileMaster.readAsObject("taskAdded.txt");
+        this.myTasks = checkObject;
+
+        myTasks.sort(new ProjectSorter());
+        System.out.println("\nYour task list sorted by project:\n" + this.myTasks);
+    }
+
+    /**
+     * For a returning user/a user who at least added one task,
+     * a list can be displayed sorted by due date (in ascending order,
+     * i.e. a list item with the earliest due date displayed first)
+     **/
+    public void viewSortedByDueDate() {
+        FileMaster fileMaster = new FileMaster();
+        ArrayList<Task> checkObject = fileMaster.readAsObject("taskAdded.txt");
+        this.myTasks = checkObject;
+
+        myTasks.sort(new DueDateSorter());
+        System.out.println("\nYour task list sorted by due date:\n" + this.myTasks);
     }
 
 }

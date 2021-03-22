@@ -41,8 +41,12 @@ public class App {
                             addNewTask();
                             break;
 
-                        case 2:
-                            list0.viewList();
+                        case 21:
+                            list0.viewSortedByProject();
+                            break;
+
+                        case 22:
+                            list0.viewSortedByDueDate();
                             break;
 
                         case 3:
@@ -82,7 +86,8 @@ public class App {
         System.out.println("" + "WELCOME TO TODOLY!\n"
                 + "Here is what you can do:");
         System.out.println("(1) Add New Task\n"
-                + "(2) View Task List\n"
+                + "(21) View Task List By Project\n"
+                + "(22) View Task List By Due Date\n"
                 + "(3) Edit Existing Task\n"
                 + "(4) Remove Existing Task\n"
                 + "(5) View Options\n"
@@ -92,7 +97,7 @@ public class App {
 
     private static void addNewTask () {
         System.out.println("Is it your first time you add a task in ToDoLy? Press 1." +
-                "\nIf you´ve saved tasks before, press 2.");
+                "\nIf you´ve added tasks before, press 2.");
         int choiceFork1 = scanner.nextInt();
         scanner.nextLine();
 
@@ -118,7 +123,7 @@ public class App {
             break;
 
             case 2:
-                list0.viewList();
+                list0.viewSortedByProject();
 
                 System.out.println("Please, give a name to a project to which your task will belong to: ");
                 String project1 = scanner.nextLine();
@@ -146,7 +151,7 @@ public class App {
      * which he/she can see from the displayed whole list of already entered tasks
      * */
     private static void editExistingTask () {
-        list0.viewList();
+        list0.viewSortedByProject();
 
         System.out.println("\nEnter an existing task title: ");
         String title = scanner.nextLine();
@@ -184,7 +189,7 @@ public class App {
      * */
     private static void removeExistingTask() {
 
-        list0.viewList();
+        list0.viewSortedByProject();
 
         System.out.println("Enter an existing task title: ");
         String title = scanner.nextLine();
@@ -203,7 +208,7 @@ public class App {
     }
 
     private static void markAsDone () {
-        list0.viewList();
+        list0.viewSortedByProject();
 
         System.out.println("Enter an existing task title: ");
         String title = scanner.nextLine();
@@ -223,7 +228,7 @@ public class App {
     private static void saveAndQuitApp () {
         System.out.println("Thank you, your tasks are saved now! \n" +
                 "Do you want to save your list and quit ToDoLy? " +
-                "If yes, type a word QUIT.\n If not, enter 5 to view your options again");
+                "If yes, type a word QUIT.\n If not, enter 5 to view your options again.");
     }
 }
 

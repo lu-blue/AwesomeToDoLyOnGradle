@@ -8,25 +8,24 @@ This application can be run directly via Gradle or via a generated jar file.
 ### Run with Gradle
 While in the root folder, start the application with Gradle´s run command:
 
+```
 bash
-
 gradle run --console plain
-
+```
 
 ### Run with jar file
 
 Generate the jar file with Gradle´s build command: 
 
+```
 bash
-
 gradle build
-
+```
 The jar file will be generated in ´build/libs´ which can be run by a Java environment: 
-
+```
 bash
-
 java -jar build/libs/app.jar
-
+```
 ## Usage
 
 You can see the inner Java structure of the app in this UML Class Diagram:

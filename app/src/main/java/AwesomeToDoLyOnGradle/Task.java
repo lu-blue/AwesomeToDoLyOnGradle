@@ -72,9 +72,9 @@ public class Task implements Serializable {
 
     @Override
    public String toString() {
-   return "\nTask project: " + project + " , Title: " + title +
-           " , Description: " + taskBody + ", Due date: " + dueDate +
-                ", Status: " + (isDone?"Done":"Not done.\n");
+   return "\nTask project: " + project + ", Title: " + title +
+           ", Description: " + taskBody + ", Due date: " + dueDate +
+                ", Status: " + (isDone?"Done.\n":"Not done.\n");
     }
 
 }
