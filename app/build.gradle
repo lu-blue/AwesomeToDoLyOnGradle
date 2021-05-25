@@ -29,10 +29,23 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'AwesomeToDoLyOnGradle.App'
+    mainClassName = 'AwesomeToDoLyOnGradle.App'
 }
 
-tasks.named('test') {
+test {
     // Use junit platform for unit tests.
     useJUnitPlatform()
 }
+
+run {
+    standardInput = System.in
+}
+
+jar {
+    manifest {
+        attributes(
+                "Main-Class": "app.App"
+        )
+    }
+}
+

@@ -11,7 +11,8 @@ public class Task implements Serializable {
     private String title;
     private String taskBody;
     private LocalDate dueDate;
-    ///to add boolean isDone
+    private boolean isDone;
+
 
     // constructor
     public void Task(String project, String title, String taskBody, String date) {
@@ -24,8 +25,22 @@ public class Task implements Serializable {
         this.project = project;
         this.title = title;
         this.taskBody = taskBody;
-        // this.dueDate = dueDate;
         this.dueDate = LocalDate.parse(date, formatter);
+
+    }
+
+    public void Task(String project, String title, String taskBody, String date, boolean isDone) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        if (project == null || title == null || taskBody == null || date == null) {
+            return;
+        }
+        this.project = project;
+        this.title = title;
+        this.taskBody = taskBody;
+        this.dueDate = LocalDate.parse(date, formatter);
+        this.isDone = false;
 
     }
 
@@ -47,21 +62,22 @@ public class Task implements Serializable {
 
     }
 
-}
-
-    /* @Override
-    public String toString() {
-        return "Task project = " + project + " , title = " + title + " , description = " + taskBody + ", due date = " + dueDate", Done = " + isDone;
-    }
-
-    public boolean isDone() {
+    public boolean getIsDone() {
         return isDone;
     }
 
-    public void setDone(boolean isDone) {
+    public void setIsDone(boolean isDone) { //true
         this.isDone = isDone;
     }
-*/
+
+    @Override
+   public String toString() {
+   return "\nTask project: " + project + ", Title: " + title +
+           ", Description: " + taskBody + ", Due date: " + dueDate +
+                ", Status: " + (isDone?"Done.\n":"Not done.\n");
+    }
+
+}
 
 
 

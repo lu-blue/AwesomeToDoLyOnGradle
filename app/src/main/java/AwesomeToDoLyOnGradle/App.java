@@ -4,91 +4,165 @@
 package AwesomeToDoLyOnGradle;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
+/**
+ * When a user starts the app, the main method initializes a program,
+ * starting an interactive user interface which will display all the options
+ * a user can choose from to: add a new task; view a task list; edit an existing Task;
+ * remove an existing task; mark tasks as done; view all available options,
+ * or save a list of tasks and quit an app.
+ * *
+ *  * @author Lubov Novozhilova
+ * */
 
 public class App {
     private static Scanner scanner = new Scanner(System.in);
     private static YourList list0 = new YourList();
 
     public static void main(String[] args) {
-        boolean quit = false;
         startApp();
-        System.out.println("\n");
+    }
+
+    private static void startApp() {
+
         viewAllOptions();
+        boolean quit = false;
 
-        while (!quit) {
-            System.out.println("\nOk, now enter an option number (or enter 5 and view all available options again):");
-            int option = scanner.nextInt();
-            scanner.nextLine();
+        try {
+            while (!quit) {
 
-            switch (option) {
+                    System.out.println("\nEnter an option number (or enter 5 to view options again):");
+                    int option = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (option) {
+                        case 1:
+                            addNewTask();
+                            break;
+
+                        case 21:
+                            list0.viewSortedByProject();
+                            break;
+
+                        case 22:
+                            list0.viewSortedByDueDate();
+                            break;
+
+                        case 3:
+                            editExistingTask();
+                            break;
+
+                        case 4:
+                            removeExistingTask();
+                            break;
+
+                        case 5:
+                            viewAllOptions();
+                            break;
+
+                        case 6:
+                            markAsDone();
+                            break;
+
+                        case 7:
+                            saveAndQuitApp();
+                            break;
+
+                        default:
+                            System.out.println("Invalid entry, just try again!");
+                    }
+                }
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "\nThe app quited. Please, restart the app.");
+            e.printStackTrace();
+        } finally {
+            if (scanner.nextLine().equals("quit"))
+                scanner.close();
+        }
+    }
+
+    private static void viewAllOptions () {
+        System.out.println("" + "WELCOME TO TODOLY!\n"
+                + "Here is what you can do:");
+        System.out.println("(1) Add New Task\n"
+                + "(21) View Task List By Project\n"
+                + "(22) View Task List By Due Date\n"
+                + "(3) Edit Existing Task\n"
+                + "(4) Remove Existing Task\n"
+                + "(5) View Options\n"
+                + "(6) Mark Task as Done\n"
+                + "(7) Save and Quit");
+    }
+
+    private static void addNewTask () {
+        System.out.println("Is it your first time you add a task in ToDoLy? Press 1." +
+                "\nIf you´ve added tasks before, press 2.");
+        int choiceFork1 = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choiceFork1) {
                 case 1:
-                    list0.viewTaskList(); // calls a method from class List0, applied on object list0 (made here, in Main class)
-                    break;
+                System.out.println("Please, give a name to a project to which your task will belong to: ");
+            String project = scanner.nextLine();
+            System.out.println("Please, enter a task title: ");
+            String title = scanner.nextLine();
+            System.out.println("Please, enter your task description (what you need to do):");
+            String taskBody = scanner.nextLine();
+            System.out.println("Please, enter when this task is due (in the format yyyy-MM-dd):");
+            String dueDate = scanner.nextLine();
 
-                case 2:
-                    addNewTask();
-                    break;
-
-                case 3:
-                    editExistingTask();
-                    break;
-
-                case 4:
-                    removeExistingTask();
-                    break;
-
-                case 5:
-                    viewAllOptions();
-                    break;
-
-                case 6:
-                    System.out.println("\nSee you next time! Your ToDoLy is shutting down..."); //doesn´t really shut down :)
-                    System.exit(0);
-                    scanner.close();
-                    //saveAndQuit();
-                    break;
-
-                default:
-                    System.out.println("Invalid entry, just try again!");
+            Task newTask = new Task();
+            newTask.Task(project, title, taskBody, dueDate);
+            if (list0.addNewTask(newTask)) { //checking if a task is successfully added
+                System.out.println("Your task was successfully added!");
+                list0.saveTask();
+            } else {
+                System.out.println("Cannot add, " + title + ", as it already exists for another task. Think of another title.");
             }
-        }
+            break;
 
-        System.exit(0);
-        scanner.close();
+            case 2:
+                list0.viewSortedByProject();
 
-    }
+                System.out.println("Please, give a name to a project to which your task will belong to: ");
+                String project1 = scanner.nextLine();
+                System.out.println("Please, enter a task title: ");
+                String title1 = scanner.nextLine();
+                System.out.println("Please, enter your task description (what you need to do):");
+                String taskBody1 = scanner.nextLine();
+                System.out.println("Please, enter when this task is due (in the format yyyy-MM-dd):");
+                String dueDate1 = scanner.nextLine();
 
-    private static void addNewTask() {
-        System.out.println("Please, give a name to a project to which your task will belong to: ");
-        String project = scanner.nextLine();
-        System.out.println("Please, enter a task title: ");
-        String title = scanner.nextLine();
-        System.out.println("Please, enter your task description (what you need to do: )");
-        String taskBody = scanner.nextLine();
-        System.out.println("Please, enter when this task is due (in the format yyyy-MM-dd");
-        String dueDate = scanner.nextLine();
-
-        Task newTask = new Task(); // a new task object is created
-        newTask.Task(project, title, taskBody, dueDate);
-        if(list0.addNewTask(newTask)) { //checking if a task is successfully added
-            System.out.println("Awesome! A new task is added in a project " + project
-                    + ": \nTask title: " + title
-                    + "\nWhat to do: " + taskBody);
-        } else {
-            System.out.println("Cannot add, " + title + "as it already exists for another task." );
+                Task newTask1 = new Task();
+                newTask1.Task(project1, title1, taskBody1, dueDate1);
+                if (list0.addNewTask(newTask1)) {
+                    System.out.println("Your task was successfully added!");
+                    list0.saveTask();
+                } else {
+                    System.out.println("Cannot add, " + title1 + "as it already exists for another task.");
+                }
+                break;
         }
     }
 
-    private static void editExistingTask() {
-        System.out.println("Enter an existing task title: ");
+    /**
+     * To edit a task, a user is asked to give a valid task title first
+     * which he/she can see from the displayed whole list of already entered tasks
+     * */
+    private static void editExistingTask () {
+        list0.viewSortedByProject();
+
+        System.out.println("\nEnter an existing task title: ");
         String title = scanner.nextLine();
         Task existingTaskRecord = list0.queryTask(title);
         if (existingTaskRecord == null) {
-            System.out.println("Ooops, a task was not found.");
+            System.out.println("Ooops, a task was not found. Try again.");
             return;
         }
+        /** If a valid title is provided, a user is asked to input new values
+         * for all the task parameters, which then replace the ones stored in that task before
+         * */
 
         System.out.println("Enter a new project name for your task to replace the old one: ");
         String newProject = scanner.nextLine();
@@ -96,67 +170,65 @@ public class App {
         String newTitle = scanner.nextLine();
         System.out.println("Give a new description to your task to replace the old one: ");
         String newTaskBody = scanner.nextLine();
-        System.out.println("Please, enter when this task is due (in the format yyyy-MM-dd");
+        System.out.println("Please, enter a new due date for this task (in the format yyyy-MM-dd):");
         String newDueDate = scanner.nextLine();
 
         Task newTask = new Task();
         newTask.Task(newProject, newTitle, newTaskBody, newDueDate);
         if (list0.updateExistingTask(existingTaskRecord, newTask)) {
-            System.out.println("Your task was successfully updated.");
+            System.out.println("Your task was successfully updated!");
+            list0.saveTask();
         } else {
             System.out.println("An error occurred while updating your task.");
         }
     }
 
-    //Looking for a task by title works but is cumbersome (as titles can be hard to remember or reproduce)
+    /**
+     * If a valid title is provided by the user,
+     * the whole task with that title is being removed
+     * */
     private static void removeExistingTask() {
+
+        list0.viewSortedByProject();
+
         System.out.println("Enter an existing task title: ");
         String title = scanner.nextLine();
         Task existingTaskRecord = list0.queryTask(title);
         if (existingTaskRecord == null) {
-            System.out.println("Ooops, a task was not found.");
+            System.out.println("Ooops, a task was not found. Try again.");
             return;
         }
 
         if (list0.removeExistingTask(existingTaskRecord)) {
-            System.out.println("Your task was successfully removed.");
+            System.out.println("Your task was successfully deleted!");
+            list0.saveTask();
         } else {
             System.out.println("An error occurred while removing your task.");
         }
     }
 
-    private static void startApp() {
-        System.out.println("Your ToDoLy is starting...");
+    private static void markAsDone () {
+        list0.viewSortedByProject();
 
-    }
-
-    private static void viewAllOptions() {
-        System.out.println("" + "Welcome to ToDoLy.\n"
-                + "You have X tasks to do and Y tasks are done!\n"
-                + "\n"
-                + "Here is a list of options:\n");
-        System.out.println ("(1) View Task List\n" //1 display. In IP specs: by project or by due date
-                + "(2) Add New Task\n" //2 add
-                + "(3) Edit Existing Task\n" // 3 update existing; 4 remove
-                + "(4) Remove Existing Task\n"
-                + "(5) View all available options\n" // 6 print available options
-                + "(6) Save and Quit"); //0 shutdown. In IP specs: not only quit, but save to file
-
-    }
-
-
-    //Additional method (not required in IP specs) for searching a task by its title
-    private static void queryTask() {
         System.out.println("Enter an existing task title: ");
         String title = scanner.nextLine();
         Task existingTaskRecord = list0.queryTask(title);
         if (existingTaskRecord == null) {
-            System.out.println("Ooops, a task was not found.");
+            System.out.println("Ooops, a task was not found. Try again.");
             return;
         }
-        System.out.println("Task with a title " + existingTaskRecord.getTitle()
-                + "belongs to a project " + existingTaskRecord.getProject() + "."
-                + "\n Task description: " + existingTaskRecord.getTaskBody());
+        if(list0.markAsDoneStatus(existingTaskRecord)){
+            System.out.println("Awesome, your task is marked as done now!");
+            list0.saveTask();
+        } else {
+            System.out.println("An error occurred while removing your task. Try again.");
+        }
+    }
 
+    private static void saveAndQuitApp () {
+        System.out.println("Thank you, your tasks are saved now! \n" +
+                "Do you want to save your list and quit ToDoLy? " +
+                "If yes, type a word QUIT.\n If not, enter 5 to view your options again.");
     }
 }
+

@@ -1,8 +1,9 @@
 package AwesomeToDoLyOnGradle;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class YourList {   //list that will contain tasks
+public class YourList implements Serializable {
 
 
     private ArrayList<Task> myTasks;
@@ -21,39 +22,56 @@ public class YourList {   //list that will contain tasks
         return true;
     }
 
-    // It updates project, title and task body, one by one,
-    // no functionality to update only one thing (just title of project, for example)
+    /**
+     * It updates the whole task - project, title, task body and a due date, one by one
+     * */
     public boolean updateExistingTask(Task oldTask, Task newTask) {
         int foundPosition = findTask(oldTask);
         if (foundPosition < 0) {
-            System.out.println ("Task with a title " + oldTask.getTitle() + " was not found.");
+            System.out.println ("Task with a title " + oldTask.getTitle().substring(0, 1).toUpperCase() + oldTask.getTitle().substring(1) + " was not found.");
             return false;
         }
 
         this.myTasks.set(foundPosition, newTask);
-        System.out.println("Task with a title " + oldTask.getTitle() + " was replaced with " + "a ask with a title " + newTask.getTitle());
+        System.out.println("Task with a title " + oldTask.getTitle().substring(0, 1).toUpperCase() + oldTask.getTitle().substring(1) + " was replaced with " + "a task with a title "
+                + newTask.getTitle().substring(0, 1).toUpperCase() + newTask.getTitle().substring(1) + ".");
         return true;
     }
 
-    // Removes all details about a task completely after it finds a task by its title
+    public boolean markAsDoneStatus(Task task0) {
+        int foundPosition = findTask(task0);
+        if (foundPosition < 0) {
+            System.out.println ("Task with a title " + task0.getTitle().substring(0, 1).toUpperCase() + task0.getTitle().substring(1) + " was not found.");
+            return false;
+        }
+        task0.setIsDone(true);
+        return true;
+    }
+
+    /**
+     * Removes all details about a task completely
+     * after it finds a task by its title
+     * */
     public boolean removeExistingTask(Task task0) {
         int foundPosition = findTask(task0);
         if (foundPosition < 0) {
-            System.out.println ("Task with a title " + task0.getTitle() + " was not found.");
+            System.out.println ("Task with a title " + task0.getTitle().substring(0, 1).toUpperCase() + task0.getTitle().substring(1) + " was not found.");
             return false;
         }
         this.myTasks.remove(foundPosition);
-        System.out.println("Task with a title " + task0.getTitle() + " was deleted.");
+        System.out.println("Task with a title " + task0.getTitle().substring(0, 1).toUpperCase() + task0.getTitle().substring(1) + " is almost deleted...");
         return true;
     }
 
-
-    private int findTask(Task task0) { //returns an index of a task you´re interested in,
-        // so that we can use it in the next method findTask below
+    /**
+     * Returns an index of a task a user is interested in,
+     * so that he/she can use it in the next method findTask below
+     * */
+    private int findTask(Task task0) {
         return this.myTasks.indexOf(task0);
     }
 
-    private int findTask(String titleContent) { //find a task by its title, returning an index
+    private int findTask(String titleContent) { //finds a task by its title, returning an index
         for (int i=0; i<this.myTasks.size(); i++) {
              Task task0 = this.myTasks.get(i);
              if (task0.getTitle().equals(titleContent)) {
@@ -61,7 +79,6 @@ public class YourList {   //list that will contain tasks
              }
         }
         return -1;
-
     }
 
     public String queryTask(Task task0) {
@@ -79,22 +96,57 @@ public class YourList {   //list that will contain tasks
         return null;
     }
 
-    //Add for "sorting" so that 1) you show project first, then - title, task body and due date;
-    // and also 2) so that to show a due date first, then - project, title and task body).
-    // How? Like a switch? And then rearrange how I print out things
-    // (in this method now I have only view in order of project, title, task body.
+    /**
+     * Saving a task list after adding/editing/removing tasks while in the app
+     **/
+    public void saveTask() {
+        FileMaster fileMaster = new FileMaster(); // to write a file
+        fileMaster.writeAsObject("taskAdded.txt", this.myTasks);
 
-    //Enables viewing a complete list of tasks.
-    public void viewTaskList() {
-        System.out.println("Here are all your existing tasks:");
-        for (int i = 0; i<this.myTasks.size(); i++) {
-            System.out.println((i+1) + "." +
-                    this.myTasks.get(i).getProject() + " -> " +
-                    this.myTasks.get(i).getTitle() + " -> " +
-                    this.myTasks.get(i).getDueDate() + " -> " +
-                    this.myTasks.get(i).getTaskBody());
-        }
-
+        ArrayList<Task> checkObject = fileMaster.readAsObject("taskAdded.txt"); // to read a file
+        System.out.println ("Your tasks are saving...");
+        //prints all of the task
+        System.out.println("Your tasks are saved: " + checkObject);
+        this.myTasks = checkObject;
+        //prints first task in the list
+        // System.out.println("Your first task is: " + checkObject.get(0));
     }
+
+    public void viewList() {
+        FileMaster fileMaster = new FileMaster();
+        ArrayList<Task> checkObject = fileMaster.readAsObject("taskAdded.txt"); // to read a file
+        System.out.println("The tasks you´ve added so far: " + checkObject);
+        this.myTasks = checkObject;
+    }
+
+    /**
+     * For a returning user/a user who at least added one task,
+     * a list saved into a file earlier is displayed.
+     * A list is displayed sorted by project (in ascending order, alphabetically)
+     **/
+    public void viewSortedByProject() {
+        FileMaster fileMaster = new FileMaster();
+        ArrayList<Task> checkObject = fileMaster.readAsObject("taskAdded.txt");
+        this.myTasks = checkObject;
+
+        myTasks.sort(new ProjectSorter());
+        System.out.println("\nYour task list sorted by project:\n" + this.myTasks);
+    }
+
+    /**
+     * For a returning user/a user who at least added one task,
+     * a list can be displayed sorted by due date (in ascending order,
+     * i.e. a list item with the earliest due date displayed first)
+     **/
+    public void viewSortedByDueDate() {
+        FileMaster fileMaster = new FileMaster();
+        ArrayList<Task> checkObject = fileMaster.readAsObject("taskAdded.txt");
+        this.myTasks = checkObject;
+
+        myTasks.sort(new DueDateSorter());
+        System.out.println("\nYour task list sorted by due date:\n" + this.myTasks);
+    }
+
 }
+
 
